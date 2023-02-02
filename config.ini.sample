@@ -1,0 +1,16 @@
+[FTP]
+host = 192.168.178.1
+user = test
+pass = test
+
+[PATH]
+remote = /FRITZ/faxbox
+local = /opt/faxprint/storage
+
+[PRINT]
+PRINTER = Alarmdrucker
+ILS_NUMBER = 0123456789
+ALERT_PRINT_COUNT = 5
+
+[NC]
+url = https://cloud.sample.wtf/s/asdfghjkl
