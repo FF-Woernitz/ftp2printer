@@ -79,8 +79,12 @@ def deleteFileFromFTP(ftp, file):
 
 def uploadFileToNC(file):
     logger.info(f"Uploading {path.basename(file)} to Nextcloud")
-    nc = nextcloud_client.Client.from_public_link(NCCONFIG.get("url"))
-    nc.drop_file(PATHCONFIG.get("local") + "/" + path.basename(file))
+    try:
+        nc = nextcloud_client.Client.from_public_link(NCCONFIG.get("url"))
+        nc.drop_file(PATHCONFIG.get("local") + "/" + path.basename(file))
+    except BaseException as e:
+        logger.critical("Failed to upload to Nextcloud")
+        logger.critical(e)
 
 
 def printFile(file, printer, count):
@@ -111,7 +115,8 @@ try:
                 else:
                     printFile(file, PRINTCONFIG.get("PRINTER"), 1)
 
-                uploadFileToNC(file)
+                if NC_ENABLED:
+                    uploadFileToNC(file)
 
                 deleteFileFromFTP(ftp, file)
 
