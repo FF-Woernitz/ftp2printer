@@ -60,8 +60,8 @@ def checkFTPforFiles(ftp):
     files = ftp.nlst(PATHCONFIG.get("remote"))
     files.remove(f"{PATHCONFIG.get('remote')}/.faxmeta.xml")
     if len(files) > 0:
-        # Wait 5 seconds, so files which are currently written, are finished.
-        time.sleep(5)
+        # Wait 10 seconds, so files which are currently written, are finished.
+        time.sleep(10)
         return files
     return False
 
